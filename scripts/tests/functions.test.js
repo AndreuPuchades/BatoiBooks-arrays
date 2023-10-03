@@ -212,5 +212,3 @@ describe('Funciones con módulos', () => {
     expect(functions.getModuleIndexByCode(modules, 'AAAA')).toBe(-1);
   });
 })
-
-

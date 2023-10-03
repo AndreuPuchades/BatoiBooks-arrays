@@ -17,6 +17,10 @@ function booksWithStatus(array, string){
 }
 
 function averagePriceOfBooks(array){
+    if (!isArrayAndContainsInfo(array)) {
+        return "0.00 €";
+      }
+
     return (array.reduce((total, book) => total += book.price, 0) / array.lenght).toFixed(2) + ' €';
 }
 
@@ -32,41 +36,51 @@ function booksNotSold(array){
     return array.filter(book => book.soldDate === '');
 }
 
-function incrementPriceOfbooks(array, number){
-    return array.map(book => book.price + (book.price * (number / 10)));
-}
-
-function getUserById(array, number){
-    user =  array.find(user => user.id == number);
-    if(user == undefined){
-        return {};
-    } else {
-        return user;
+function incrementPriceOfbooks(arrayBooks, percentajeToIncrement) {
+    if (!isArrayAndContainsInfo(arrayBooks)) {
+      return;
     }
-}
-
-function getUserIndexById(array, number){
-    user = array.findIndex(user => user.id === number);
-    if(user == -1){
-        return {};
-    } else {
-        return user;
+  
+    if (isNumber(percentajeToIncrement) && percentajeToIncrement >= 0 && percentajeToIncrement <= 100) {
+      return;
     }
-}
 
-function getUserByNickName(array, string){
-    user = array.find(user => user.nick == string);
-    if(user == undefined){
-        return {};
-    } else {
-        return module;
+    return arrayBooks.map((book) => (book.price *= 1 + percentajeToIncrement));
+  }
+
+  function getUserById(arrayUsers, number) {
+    if (!isArrayAndContainsInfo(arrayUsers)) {
+      return [];
     }
-}
+  
+    if (!isValidUser(number)) {
+      return [];
+    }
+    return checkIsUndefined(arrayUsers.find((user) => user.id === number));
+  }
+
+  function getUserIndexById(arrayUsers, idUser) {
+    if (!isArrayAndContainsInfo(arrayUsers)) {
+      return [];
+    }
+  
+    if (!isValidUser(idUser)) {
+      return [];
+    }
+    return arrayUsers.findIndex((user) => user.id === idUser);
+  }
+  
+  function getUserByNickName(arrayUsers, nickname) {
+    if (!isArrayAndContainsInfo(arrayUsers)) {
+      return new Object();
+    }
+    return checkIsUndefined(arrayUsers.find((user) => user.nick === nickname));
+  }
 
 function getModuleByCode(array, string){
     module = array.find(module => module.code == string);
     if(module == undefined){
-        return {};
+        return [];
     } else {
         return module;
     }
@@ -74,6 +88,14 @@ function getModuleByCode(array, string){
 
 function getModuleIndexByCode(array, string){
     return array.findIndex(module => module.code == string);
+}
+
+function isValidUser(idUser){
+    return !Number.isNaN(idUser) && idUser >= 0;
+}
+
+function isArrayAndContainsInfo(array) {
+    return Array.isArray(array) && array.length;
 }
 
 export default {

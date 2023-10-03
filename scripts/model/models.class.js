@@ -9,12 +9,7 @@ export default class models{
         array.forEach(modelo => {
             this.modelos.push(new book(code = modelo.code, cliteral = modelo.cliteral,  vliteral = modelo.vliteral,  idCourse = modelo.idCourse));
         });
-        this.code = code;
-        this.cliteral = cliteral;
-        this.vliteral = vliteral;
-        this.idCourse = idCourse;
     }
-
 
     addItem(modelNew) {
         if(modelNew instanceof model){
