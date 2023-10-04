@@ -1,4 +1,4 @@
-export default class model{
+export class model{
     constructor(){
         this.code = code;
         this.cliteral = cliteral;

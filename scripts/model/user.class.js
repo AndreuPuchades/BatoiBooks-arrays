@@ -1,4 +1,4 @@
-export default class user{
+export class user{
     constructor(){
         this.id = id;
         this.email = email;

@@ -1,6 +1,6 @@
 import book from "./book.class"
 
-export default class Books {
+export class Books {
     constructor() {
       this.books = []
     }
@@ -23,12 +23,14 @@ export default class Books {
             this.books.slice(indice, indice + 1);
         } else {
             console.log("No existe un libro con la id " + number);
+            return {};
         }
     }
 
     getItemById(number){
         libro = this.books.find(libro, libro.id == number);
         if(libro == undefined){
+            console.log("No existe un libro con la id " + number);
             return {};
         } else {
             return libro;
@@ -41,7 +43,44 @@ export default class Books {
             return indice;
         } else {
             console.log("No existe un libro con la id " + number);
+            return {};
         }
+    }
+
+    booksFromUser(userId) {
+        return this.books.filter((item) => item.idUser === userId);
+    }
+    
+    booksFromModule(string) {
+        return this.books.filter(book => book.idModule == string);
+    }
+    
+    booksCheeperThan(number){
+        return this.books.filter(book => book.price <= number);
+    }
+    
+    booksWithStatus(string){
+        return this.books.filter(book => book.status == string);
+    }
+    
+    averagePriceOfBooks(){
+        if (!isArrayAndContainsInfo(this.books)) {
+            return "0.00 €";
+          }
+    
+        return (this.books.reduce((total, book) => total += book.price, 0) / this.books.lenght).toFixed(2) + ' €';
+    }
+    
+    booksOfTypeNote() {
+        return this.books.filter(book => book.publisher == 'Apunts');
+    }
+    
+    booksNotOfTypeNote(){
+        return this.books.filter(book => book.publisher != 'Apunts');
+    }
+    
+    booksNotSold(){
+        return this.books.filter(book => book.soldDate === '');
     }
 
     toString(){

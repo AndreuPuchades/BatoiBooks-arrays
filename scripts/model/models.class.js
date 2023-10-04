@@ -1,6 +1,6 @@
 import model from "./model.class";
 
-export default class models{
+export class models{
     constructor(){
         this.modelos = [];
     }

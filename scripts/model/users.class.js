@@ -1,6 +1,6 @@
 import user from "./user.class";
 
-export default class users{
+export class users{
     constructor(){
         this.usuarios = [];
     }
@@ -21,6 +21,7 @@ export default class users{
         indice = this.usuarios.findIndex(user => user.id === number);
         if(indice < 0){
             console.log("No existe un usuario con la id " + number);
+            return {};
         } else {
             this.users.slice(indice, indice + 1);
         }
@@ -30,6 +31,7 @@ export default class users{
         usuario = this.usuarios.find(user => user.id === number);
         if(usuario < 0){
             console.log("No existe un usuario con la id " + number);
+            return {};
         } else {
             return usuario;
         }
