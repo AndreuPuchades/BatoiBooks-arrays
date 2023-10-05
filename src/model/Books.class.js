@@ -38,7 +38,10 @@ export default class Books {
   }
 
   booksFromModule(module) {
-    return new Books(this.data.filter((book) => book.idModule == module));
+    let newBooks = this.data.filter((book) => book.idModule == module);
+    let books  = new Books();
+    books.populateData(newBooks);
+    return books;
   }
 
   booksCheeperThan(price) {
@@ -49,17 +52,23 @@ export default class Books {
     if (Number.isNaN(price) && isPositive(price)) {
       return [];
     }
-    return new Books(this.data.filter((book) => book.price <= price));
+
+    let newBooks = this.data.filter((book) => book.price <= price);
+    let books = new Books();
+    books.populateData(newBooks);
+    return books;
   }
 
   booksWithStatus(status) {
-    if (!isArrayAndContainsInfo(this.data)) {
-      return [Function, Books];
+    let books = new Books();
+
+    if (["bad", "good", "new"].includes(status)) {
+      let newBooks = this.data.filter((book) => book.status == status);
+      books.populateData(newBooks);
+      return books;
     }
-    if (!["bad", "good", "new"].includes(status)) {
-      return [Function, Books];
-    }
-    return new Books(this.data.filter((book) => book.status === status));
+
+    return books;
   }
 
   averagePriceOfBooks() {
@@ -78,14 +87,22 @@ export default class Books {
     if (!isArrayAndContainsInfo(this.data)) {
       return [];
     }
-    return new Books(this.data.filter((book) => book.publisher === "Apunts"));
+
+    let newBooks = this.data.filter((book) => book.publisher === "Apunts");
+    const books = new Books();
+    books.populateData(newBooks);
+    return books;
   }
 
   booksNotOfTypeNote() {
     if (!isArrayAndContainsInfo(this.data)) {
       return [];
     }
-    return new Books(this.data.filter((book) => book.publisher !== "Apunts"));
+
+    let newBooks = this.data.filter((book) => book.publisher !== "Apunts");
+    const books = new Books();
+    books.populateData(newBooks);
+    return books;
   }
 
   booksNotSold() {
@@ -95,15 +112,15 @@ export default class Books {
     return new Books(this.data.filter((book) => book.soldDate === ""));
   }
 
-  incrementPriceOfbooks(percentajeToIncrement) {
+  incrementPriceOfbooks(porcentaje) {
     if (!isArrayAndContainsInfo(this.data)) {
       return;
     }
 
-    if (!isValidPercentaje(percentajeToIncrement)) {
+    if (!isValidPercentaje(porcentaje)) {
       return;
     }
-    return this.data.map((book) => (book.price = book.price * (1 + percentajeToIncrement)));
+    return this.data.map((book) => (book.price += book.price * (porcentaje)));
   }
 
   getIdBooks(){
@@ -112,9 +129,14 @@ export default class Books {
 }
 
 
-  toString() {
-    return `El libro con id ${this.data.id} está en estado: ${this.data.status} y pertenece al módulo ${this.data.module}`;
-  }
+toString() {
+  let toString = "Libros (total " + this.data.length +")";
+
+  this.data.forEach(book => {
+      toString += "\n    - " + book.toString();
+  });
+  return toString;
+}
 }
 
 function isPositive(number) {

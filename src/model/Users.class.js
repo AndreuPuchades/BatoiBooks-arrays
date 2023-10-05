@@ -18,25 +18,29 @@ export default class Users {
   }
 
   removeItem(id) {
-    indice = this.getUserIndexById(id);
-    if (indice === -1) {
-      throw new Error("No existe esta id");
+    let userDelete = this.getItemById(id);
+    if (userDelete == -1) {
+      throw Error("No existe la Id");
     }
-    this.data.splice(indice, 1);
+    this.data = this.data.filter(function (book) {
+      return book.id !== id;
+    });
     return {};
   }
 
   toString() {
-    text = `Usuarios (total ${this.data.length})`;
-    for(i = 0; i < data.length; i++){
-        text += ` - ${data[i].nick} (${data[i].id}) - ${data[i].email}`;
-    }
-  }
+    let toString = "Usuarios (total " + this.data.length +")";
+
+    this.data.forEach(user => {
+        toString += "\n    - " + user.toString();
+    });
+    return toString;
+}
 
   getItemById(idUser) {
-    user = this.data.find((user) => user.id == idUser);
-    if(user == undefined){
-        return {};
+    let user = this.data.find((user) => user.id == idUser);
+    if(user === undefined){
+        return -1;
     }
     return user;
   }

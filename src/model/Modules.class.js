@@ -20,8 +20,8 @@ export default class Modules {
   }
 
   removeItem(code) {
-    const itemToRemove = this.getModuleByCode(code);
-    if (Object.keys(itemToRemove).length === 0) {
+    const userDelete = this.getModuleByCode(code);
+    if (Object.keys(userDelete).length === 0) {
       throw new Error("Id no encontrado");
     }
     this.data = this.data.filter(function (module) {
