@@ -1,6 +1,6 @@
 import { describe, test, expect, beforeEach } from 'vitest'
-import Users from '../src/model/users.class'
-import User from '../src/model/user.class'
+import Users from '../src/model/Users.class'
+import User from '../src/model/User.class'
 
 
 let users, user1, user2

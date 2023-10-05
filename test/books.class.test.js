@@ -1,6 +1,6 @@
 import { describe, test, expect, beforeEach, beforeAll } from 'vitest'
-import Books from '../src/model/books.class'
-import Book from '../src/model/book.class'
+import Books from '../src/model/Books.class'
+import Book from '../src/model/Book.class'
 
 let books, book1, book2, book3
 const data = [

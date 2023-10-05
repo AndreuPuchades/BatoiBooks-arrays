@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest'
-import Module from '../src/model/module.class'
+import Module from '../src/model/Module.class'
 
 describe('Clase Module', () => {
   test('constructor crea un módulo', () => {

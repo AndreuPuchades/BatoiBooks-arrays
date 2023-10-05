@@ -1,6 +1,6 @@
 import { describe, test, expect, beforeEach } from 'vitest'
-import Modules from '../src/model/modules.class'
-import Module from '../src/model/module.class'
+import Modules from '../src/model/Modules.class'
+import Module from '../src/model/Module.class'
 
 
 let modules, module1, module2

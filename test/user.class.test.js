@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest'
-import User from '../src/model/user.class'
+import User from '../src/model/User.class';
 
 describe('Clase User', () => {
   test('constructor crea un usuario', () => {
