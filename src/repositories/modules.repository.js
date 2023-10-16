@@ -11,7 +11,7 @@ export default class ModulesRepository{
     }
 
     async getModuleById(idModule) {
-        const response = await fetch(server + '/modules?id=' + idModule);
+        const response = await fetch(server + '/modules/' + idModule);
         if (!response.ok) {
           throw `Error ${response.status} de la BBDD: ${response.statusText}`
         }
@@ -29,7 +29,7 @@ export default class ModulesRepository{
     }
 
     async removeModule(idModule) {
-        const response = await fetch(server + '/modules?id=' + idModule, {method: "DELETE"});
+        const response = await fetch(server + '/modules/' + idModule, {method: "DELETE"});
         if (!response.ok) {
           throw `Error ${response.status} de la BBDD: ${response.statusText}`
         }
@@ -38,7 +38,7 @@ export default class ModulesRepository{
     }
 
     async changeModule(idModule, module) {
-        const response = await fetch(server + '/module?id=' + idModule, {
+        const response = await fetch(server + '/modules/' + idModule, {
             method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(module)
         });
         return response.json();

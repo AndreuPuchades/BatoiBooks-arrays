@@ -1,7 +1,7 @@
 const server = import.meta.env.VITE_URL_API;
 
 export default class UsersRepository{
-    async getAlBooks() {
+    async getAllBooks() {
         const response = await fetch(server + '/users/');
         if (!response.ok) {
           throw `Error ${response.status} de la BBDD: ${response.statusText}`
@@ -11,7 +11,7 @@ export default class UsersRepository{
     }
 
     async getBookById(idUser) {
-        const response = await fetch(server + '/users?id=' + idUser);
+        const response = await fetch(server + '/users/' + idUser);
         if (!response.ok) {
           throw `Error ${response.status} de la BBDD: ${response.statusText}`
         }
@@ -29,7 +29,7 @@ export default class UsersRepository{
     }
 
     async removeBook(idUser) {
-        const response = await fetch(server + '/users?id=' + idUser, {method: "DELETE"});
+        const response = await fetch(server + '/users/' + idUser, {method: "DELETE"});
         if (!response.ok) {
           throw `Error ${response.status} de la BBDD: ${response.statusText}`
         }
@@ -38,7 +38,7 @@ export default class UsersRepository{
     }
 
     async changeBook(idUser, user) {
-        const response = await fetch(server + '/users?id=' + idUser, {
+        const response = await fetch(server + '/users/' + idUser, {
             method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(user)
         });
         return response.json();

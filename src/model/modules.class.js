@@ -1,42 +1,50 @@
-import Module from "./module.class"
+import Module from "./module.class";
+import ModulesRepository from "../repositories/modules.repository";
 
 export default class Modules {
   constructor() {
-    this.data = []
+    this.data = [];
   }
   
-  getModuleByCode(code) {
-    return this.data.find((item) => item.code === code) || {}
-  }
-
-  populateData(payload) {
-    this.data = payload.map((item) => new Module(
+  async populateData() {
+    const repositoryModules = new ModulesRepository();
+    const modules = await repositoryModules.getAllModules();
+    this.data = modules.map((item) => new Module(
       item.code, 
       item.cliteral, 
       item.vliteral, 
       item.idCourse
-    ))
+    ));
   }
 
-  addItem(payload) {
-    const newModule = new Module(payload.code, payload.cliteral, payload.vliteral, payload.idCourse)
-    this.data.push(newModule)
-    return newModule
+  async addItem(payload) {
+    const repositoryModules = new ModulesRepository();
+    const module = await repositoryModules.addModule(payload);
+    const newModule = new Module(module.code, module.cliteral, module.vliteral, module.idCourse);
+    this.data.push(newModule);
+    return newModule;
   }
 
-  removeItem(code) {
-    const index = this.data.findIndex((item) => item.code === code)
-    if (index === -1) {
-      throw "No existe un módulo con código " + code
-    }
-    this.data.splice(index, 1)
-    return {}
+  async removeItem(code) {
+    const repositoryModules = new ModulesRepository();
+    await repositoryModules.removeModule(code);
+    const index = this.getModuleIndexByCode(code);
+    this.data.splice(index, 1);
+    return {};
+  }
+
+  getModuleByCode(code) {
+    return this.data.find((item) => item.code === code) || {};
+  }
+
+  getModuleIndexByCode(code) {
+    return this.data.findIndex((item) => item.code === code);
   }
 
   toString() {
     let modulesToString = `Módulos (total ${this.data.length})`
     this.data.forEach((item) => modulesToString += `
-    - ${item}`)
-    return modulesToString
+    - ${item}`);
+    return modulesToString;
   }
 }
