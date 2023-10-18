@@ -1,16 +1,16 @@
 import { describe, test, expect, beforeEach, vi } from 'vitest'
 import Modules from '../src/model/modules.class'
 import Module from '../src/model/module.class'
-import ModulesRepository from '../src/repositories/modules.repositories'
+import ModulesRepository from '../src/repositories/modules.repository'
 import data from './fixtures/modules.json'
 
-vi.mock('../src/repositories/modules.repositories')
+vi.mock('../src/repositories/modules.repository')
 ModulesRepository.mockImplementation(() => {
   return {
     addModule: (item) => item,
     getAllModules: () => data,
-    removeModule: (id) => {
-      if (id === data[0].id || id === data[1].id)
+    removeModule: (code) => {
+      if (code === data[0].code || code === data[1].code)
         return {}
       return Promise.reject(new Error('empty'))
     }

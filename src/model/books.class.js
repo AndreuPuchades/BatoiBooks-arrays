@@ -16,9 +16,9 @@ export default class Books {
     this.data = books.map((item) => new Book(item));
   }
 
-  async addItem(payload) {
+  async addItem(bookNew) {
     const repositoryBooks = new BooksRepository();
-    const book = await repositoryBooks.addBook(payload);
+    const book = await repositoryBooks.addBook(bookNew);
     const newBook = new Book(book);
     this.data.push(newBook);
     return newBook;
@@ -39,62 +39,64 @@ export default class Books {
     return booksToString;
   }
 
-  booksFromUser(userId) {
-    const filteredBooks = new Books();
-    filteredBooks.data = this.data.filter((item) => item.idUser === userId);
-    return filteredBooks;
+  booksFromUser(idUser) {
+    const books = new Books();
+    books.data = this.data.filter((item) => item.idUser === idUser);
+    return books;
   }
 
-  booksFromModule(moduleId) {
-    const filteredBooks = new Books();
-    filteredBooks.data = this.data.filter((item) => item.idModule === moduleId);
-    return filteredBooks;
+  booksFromModule(idModule) {
+    const books = new Books();
+    books.data = this.data.filter((item) => item.idModule === idModule);
+    return books;
   }
 
-  booksCheeperThan(price) {
-    const filteredBooks = new Books();
-    filteredBooks.data = this.data.filter((item) => item.price <= price);
-    return filteredBooks;
+  booksCheeperThan(precio) {
+    const books = new Books();
+    books.data = this.data.filter((item) => item.price <= precio);
+    return books;
   }
 
   booksWithStatus(status) {
-    const filteredBooks = new Books();
-    filteredBooks.data = this.data.filter((item) => item.status === status);
-    return filteredBooks;
+    const books = new Books();
+    books.data = this.data.filter((item) => item.status === status);
+    return books;
   }
 
   averagePriceOfBooks() {
     const sum = this.data.reduce((total, item) => total + item.price, 0);
-    return this.data.length
-      ? (sum / this.data.length).toFixed(2) + ' €'
-      : '0 €';
+    if(this.data.length){
+      return (sum / this.data.length).toFixed(2) + ' €' ;
+    } else {
+      return '0 €';
+    }
   }
 
   booksOfTypeNote() {
-    const filteredBooks = new Books();
-    filteredBooks.data = this.data.filter((item) => item.publisher === 'Apunts');
-    return filteredBooks;
+    const books = new Books();
+    books.data = this.data.filter((item) => item.publisher === 'Apunts');
+    return books;
   }
 
   booksNotOfTypeNote() {
-    const filteredBooks = new Books();
-    filteredBooks.data = this.data.filter((item) => item.publisher !== 'Apunts');
-    return filteredBooks;
+    const books = new Books();
+    books.data = this.data.filter((item) => item.publisher !== 'Apunts');
+    return books;
   }
 
   booksNotSold() {
-    const filteredBooks = new Books();
-    filteredBooks.data = this.data.filter((item) => !item.soldDate);
-    return filteredBooks;
+    const books = new Books();
+    books.data = this.data.filter((item) => !item.soldDate);
+    return books;
   }
 
-  incrementPriceOfbooks(increment) {
+  incrementPriceOfbooks(number) {
     const repository = new BooksRepository();
     this.data.forEach(async (book) => {
-      const newPrice = book.price * (1 + increment);
-      const roundedPrice = Math.round(newPrice * 100) / 100;
-      const bookChanged = await repository.updatePriceOfBook(book.id, roundedPrice);
-      book.price = bookChanged.price;
+      const newPrice = book.price * (1 + number);
+      const precio = Math.round(newPrice * 100) / 100;
+      const bookNew = await repository.updatePriceOfBook(book.id, precio);
+      book.price = bookNew.price;
     });
   }
 }

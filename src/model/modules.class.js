@@ -17,9 +17,9 @@ export default class Modules {
     ));
   }
 
-  async addItem(payload) {
+  async addItem(moduleNew) {
     const repositoryModules = new ModulesRepository();
-    const module = await repositoryModules.addModule(payload);
+    const module = await repositoryModules.addModule(moduleNew);
     const newModule = new Module(module.code, module.cliteral, module.vliteral, module.idCourse);
     this.data.push(newModule);
     return newModule;

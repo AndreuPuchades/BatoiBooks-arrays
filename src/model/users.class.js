@@ -17,9 +17,9 @@ export default class Users {
     ))
   }
 
-  async addItem(payload) {
+  async addItem(userNew) {
     const repositoryUser = new UsersRepository();
-    const user = await repositoryUser.addUser(payload);
+    const user = await repositoryUser.addUser(userNew);
     const newUser = new User(user.id, user.email, user.nick, user.password);
     this.data.push(newUser);
     return newUser;
@@ -34,10 +34,10 @@ export default class Users {
   }
 
   toString() {
-    let usersToString = `Usuarios (total ${this.data.length})`
-    this.data.forEach((item) => usersToString += `
+    let cadena = `Usuarios (total ${this.data.length})`;
+    this.data.forEach((item) => cadena += `
     - ${item}`);
-    return usersToString;
+    return cadena;
   }
 
   getUserById(id) {
@@ -48,7 +48,7 @@ export default class Users {
     return this.data.findIndex((item) => item.id === id);
   }
 
-  getUserByNick(nick) {
-    return this.data.find((item) => item.nick === nick) || {};
+  getUserByNick(nombre) {
+    return this.data.find((item) => item.nick === nombre) || {};
   }
 }
