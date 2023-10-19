@@ -4,7 +4,7 @@ export default class BooksRepository{
     async getAllBooks() {
         const response = await fetch(server + '/books');
         if (!response.ok) {
-          throw `Error ${response.status} de la BBDD: ${response.statusText}`
+          throw `Error ${response.status} de la BBDD: ${response.statusText}`;
         }
         const myData = await response.json();
         return myData;
@@ -13,7 +13,7 @@ export default class BooksRepository{
     async getBookById(idBook) {
         const response = await fetch(server + '/books/' + idBook);
         if (!response.ok) {
-          throw `Error ${response.status} de la BBDD: ${response.statusText}`
+          throw `Error ${response.status} de la BBDD: ${response.statusText}`;
         }
         const myData = await response.json();
         return myData;
@@ -31,7 +31,7 @@ export default class BooksRepository{
     async removeBook(idBook) {
         const response = await fetch(server + '/books/' + idBook, {method: "DELETE"});
         if (!response.ok) {
-          throw `Error ${response.status} de la BBDD: ${response.statusText}`
+          throw `Error ${response.status} de la BBDD: ${response.statusText}`;
         }
         const myData = await response.json();
         return myData;
@@ -54,11 +54,11 @@ export default class BooksRepository{
       headers:{
         'Content-Type': 'application/json'
       }
-    })
+    });
     if (!response.ok) {
-      throw `Error ${response.status} de la BBDD: ${response.statusText}`
+      throw `Error ${response.status} de la BBDD: ${response.statusText}`;
     }
-    const data = await response.json()
-    return data
+    const data = await response.json();
+    return data.price = newPrice;
   }
 }

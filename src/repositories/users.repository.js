@@ -4,7 +4,7 @@ export default class UsersRepository{
     async getAllUsers() {
         const response = await fetch(server + '/users');
         if (!response.ok) {
-          throw `Error ${response.status} de la BBDD: ${response.statusText}`
+          throw `Error ${response.status} de la BBDD: ${response.statusText}`;
         }
         const myData = await response.json();
         return myData;
@@ -13,7 +13,7 @@ export default class UsersRepository{
     async getUserById(idUser) {
         const response = await fetch(server + '/users/' + idUser);
         if (!response.ok) {
-          throw `Error ${response.status} de la BBDD: ${response.statusText}`
+          throw `Error ${response.status} de la BBDD: ${response.statusText}`;
         }
         const myData = await response.json();
         return myData;
@@ -31,7 +31,7 @@ export default class UsersRepository{
     async removeUser(idUser) {
         const response = await fetch(server + '/users/' + idUser, {method: "DELETE"});
         if (!response.ok) {
-          throw `Error ${response.status} de la BBDD: ${response.statusText}`
+          throw `Error ${response.status} de la BBDD: ${response.statusText}`;
         }
         const myData = await response.json();
         return myData;
