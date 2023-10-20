@@ -91,10 +91,10 @@ export default class Books {
   }
 
   async incrementPriceOfbooks(number) {
-    const repository = new BooksRepository();
+    const repository = new BooksRepository()
     this.data.forEach(async (book) => {
-      bookNew = await repository.updatePriceOfBook(book.id, (book.price * (1 + number)));
-      book = bookNew;
-    });
+      const bookNew = await repository.updatePriceOfBook(book.id, Math.round(book.price * (1 + number)));
+      book.price = bookNew.price
+    })
   }
 }
