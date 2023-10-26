@@ -1,12 +1,170 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ayax</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/main.js"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DOM</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+    }
+
+    header {
+      background-color: #007ACC;
+      color: white;
+      text-align: center;
+      padding: 10px;
+    }
+
+    .logo {
+      max-width: 100px;
+      max-height: 100px;
+    }
+
+    h1 {
+      font-size: 24px;
+      margin: 10px 0;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      background-color: #007ACC;
+      padding: 10px 0;
+    }
+
+    nav li {
+      margin: 0 20px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: white;
+    }
+
+    button#remove {
+      background-color: #FF4646;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      margin: 10px;
+    }
+
+    #bookForm {
+      color: black;
+      background-color: white;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      margin: 10px;
+    }
+
+    #bookForm label {
+      display: inline-block;
+      margin-right: 10px;
+      font-weight: bold;
+      margin-top: 10px;
+
+    }
+
+    #bookForm input[type="text"],
+    #bookForm input[type="number"],
+    #bookForm textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      box-shadow: none;
+    }
+
+    #bookForm select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      margin-top: 5px;
+      box-shadow: none;
+    }
+
+    #bookForm button {
+      background-color: #007ACC;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 10px 0;
+    }
+
+    #list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin: 10px;
+    }
+
+    #message {
+      color: black;
+      background-color: white;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      margin: 10px;
+    }
+
+    #book {
+      color: black;
+      background-color: white;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      margin: 10px;
+    }
+
+    #list {
+      background-color: rgb(218, 218, 218);
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      margin: 10px;
+    }
+
+    .card {
+      background-color: white;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 10px;
+      margin: 10px;
+      display: flex;
+      width: calc(33.33% - 20px);
+    }
+
+    .card img {
+      max-width: 100px;
+      max-height: 100px;
+      margin-right: 10px;
+    }
+
+    footer {
+      background-color: #007ACC;
+      color: white;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script type="module" src="/main.js"></script>
+</body>
+
 </html>

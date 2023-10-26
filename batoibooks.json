@@ -1902,7 +1902,7 @@
       "idUser": 4,
       "idModule": "5025",
       "publisher": "McGraw-Hill",
-      "price": 100.91249923988416,
+      "price": 100.91,
       "pages": 173,
       "status": "good",
       "photo": "",
@@ -1911,28 +1911,27 @@
       "id": 8
     },
     {
-      "idUser": 4,
-      "idModule": "5025",
-      "publisher": "Apunts",
-      "price": 259.008748049036,
-      "pages": 73,
-      "status": "good",
+      "id": 9,
+      "idUser": 2,
+      "idModule": "0014",
+      "publisher": "Andreu",
+      "price": 12,
+      "pages": 122,
       "photo": "",
-      "comments": "",
-      "soldDate": "",
-      "id": 9
+      "comments": "Hola\n",
+      "soldDate": ""
     },
     {
-      "idUser": 5,
-      "idModule": "5021",
-      "publisher": "Apunts",
-      "price": 5,
-      "pages": 57,
-      "status": "good",
+      "id": 10,
+      "idUser": 2,
+      "idModule": "0017",
+      "publisher": "asdsad",
+      "price": 112,
+      "pages": 12,
+      "status": {},
       "photo": "",
-      "comments": "",
-      "soldDate": "",
-      "id": 10
+      "comments": "asd",
+      "soldDate": ""
     }
   ]
 }
