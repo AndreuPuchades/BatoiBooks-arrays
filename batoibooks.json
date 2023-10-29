@@ -1913,23 +1913,13 @@
     {
       "id": 9,
       "idUser": 2,
-      "idModule": "0014",
+      "idModule": "0015",
       "publisher": "Andreu",
       "price": 12,
       "pages": 122,
       "photo": "",
-      "comments": "Hola\n",
-      "soldDate": ""
-    },
-    {
-      "id": 10,
-      "idUser": 2,
-      "idModule": "0016",
-      "publisher": "Andreu",
-      "price": 12,
-      "pages": 122,
-      "photo": "",
-      "comments": "hOLA",
+      "comments": "Buen libro",
+      "status": "bad",
       "soldDate": ""
     }
   ]

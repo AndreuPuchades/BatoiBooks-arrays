@@ -41,7 +41,7 @@ export default class Controller {
             const price = parseFloat(document.getElementById('price').value);
             const pages = parseInt(document.getElementById('pages').value);
             const comments = document.getElementById('comments').value;
-            const status = document.getElementById('estado').value;
+            const status = document.getElementsByName('estado').name;
 
             if (idModule === "- Selecciona un módulo -") {
                 this.view.renderMessage("error", "Selecciona un módulo.");
@@ -68,7 +68,7 @@ export default class Controller {
                 const idUser = 2;
                 const photo = "";
                 const soldDate = "";
-                const book = new Book({id, idUser, idModule, publisher, price, pages, status, photo, comments, soldDate});
+                const book = new Book({id, idUser, idModule, publisher, price, pages, status, photo, comments});
                 await this.books.addItem(book);
                 document.getElementById('bookForm').reset();
                 this.view.renderBook(book);
