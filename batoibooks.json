@@ -1924,13 +1924,12 @@
     {
       "id": 10,
       "idUser": 2,
-      "idModule": "0017",
-      "publisher": "asdsad",
-      "price": 112,
-      "pages": 12,
-      "status": {},
+      "idModule": "0016",
+      "publisher": "Andreu",
+      "price": 12,
+      "pages": 122,
       "photo": "",
-      "comments": "asd",
+      "comments": "hOLA",
       "soldDate": ""
     }
   ]

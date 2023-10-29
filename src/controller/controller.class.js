@@ -41,7 +41,7 @@ export default class Controller {
             const price = parseFloat(document.getElementById('price').value);
             const pages = parseInt(document.getElementById('pages').value);
             const comments = document.getElementById('comments').value;
-            const status = document.getElementById('estado').value;
+            const status = document.getElementById('estado');
 
             if (idModule === "- Selecciona un módulo -") {
                 this.view.renderMessage("error", "Selecciona un módulo.");
