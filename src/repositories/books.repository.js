@@ -38,12 +38,18 @@ export default class BooksRepository{
     }
 
     async changeBook(book) {
-      const response = await fetch(server + `/books/${book.id}`, {method: 'PUT', body: JSON.stringify(book), headers: {'Content-Type': 'application/json'}});
-      if (!response.ok) {
-        throw `Error ${response.status} de la BBDD: ${response.statusText}`;
-      }
-      const data = await response.json();
-      return data;
+        const response = await fetch(server + '/books/' + book.id, {
+            method: 'PUT',
+            body: JSON.stringify(book),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        if (!response.ok) {
+            throw `Error ${response.status} de la BBDD: ${response.statusText}`
+        }
+        const data = await response.json()
+        return data
     }
     
   async updatePriceOfBook(idBook, newPrice) {

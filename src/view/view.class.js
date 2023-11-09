@@ -1,8 +1,28 @@
 export default class View {
     constructor(){
-        this.list = document.getElementById("list");
-        this.bookForm = document.getElementById("bookForm");
+        this.reset = document.getElementById("reset");
+        this.listBooks = document.getElementById("list");
+        this.submit = document.getElementById("submit");
+        this.about = document.getElementById("about");
+        this.form = document.getElementById("bookForm");
         this.remove = document.getElementById("remove");
+    }
+
+    renderOptionSelect(book){
+        const DOMSelect = document.getElementById("bookForm");
+        const DOMId = document.createElement("input");
+        DOMId.id = "id";
+        DOMId.value = book.id;
+        DOMId.type = "hidden";
+        DOMSelect.prepend(DOMId);
+        document.getElementById(book.idModule).selected = "selected";
+        document.getElementById("publisher").value = book.publisher;
+        document.querySelector(`input[id=${book.status}]`).checked = true;
+        document.getElementById("price").value = Math.floor(book.price);
+        document.getElementById("pages").value = Math.floor(book.pages);
+        document.getElementById("comments").value = book.comments;
+        const button = document.querySelector('button[type="submit"]');
+        button.innerText = "Cambiar";
     }
 
     renderOptionsModules(modules){
@@ -11,6 +31,7 @@ export default class View {
             const DOMoption = document.createElement("option");
             DOMoption.textContent = module.cliteral;
             DOMoption.value = module.code;
+            DOMoption.id = module.code;
 
             DOMselect.appendChild(DOMoption);
         });
@@ -21,22 +42,50 @@ export default class View {
         status.forEach((estado) => {
             const DOMoption = document.createElement("input");
             const DOMoptionLabel = document.createElement("label");
-            DOMoptionLabel.id = "estado";
+            DOMoptionLabel.id = estado;
             DOMoptionLabel.textContent = estado;
             DOMoption.type = "radio";
             DOMoption.value = estado;
             DOMoption.name = "estado";
-            DOMoption.id = "estado";
+            DOMoption.id = estado;
 
             DOMselect.appendChild(DOMoption);
             DOMselect.appendChild(DOMoptionLabel);
         });
     }
 
+    renderList(eliminar){
+        if(eliminar){
+            this.listBooks.classList.add("oculto");
+        } else {
+            this.listBooks.classList.remove("oculto");
+        }
+        return this.listBooks;
+    }
+
+    renderAbout(eliminar){
+        if(eliminar){
+            this.about.classList.add("oculto");
+        } else {
+            this.about.classList.remove("oculto");
+        }
+        return this.about;
+    }
+
+    renderForm(eliminar){
+        if(eliminar){
+            this.form.classList.add("oculto");
+        } else {
+            this.form.classList.remove("oculto");
+        }
+        return this.form;
+    }
+
     renderBook(book){
         const DOMselect = document.getElementById("list");
         const DOMdivBook = document.createElement("div");
         const DOMdiv = document.createElement("div");
+
         DOMdiv.id = "book";
         DOMdivBook.id = "book-" + book.id;
         DOMdiv.innerHTML = `
@@ -48,9 +97,20 @@ export default class View {
         <h3>Paginas: ${book.pages}</h3>
         <h3>Estado: ${book.status}</h3>
         <h3>Comentario: ${book.comments}</h3>
+        <button class="add">
+            <span class="material-icons">icono add_shopping_cart</span>
+        </button>
+        <button class="edit">
+            <span class="material-icons">icono edit</span>
+        </button>
+        <button class="delete">
+            <span class="material-icons">icono delete</span>
+        </button>
         `;
+
         DOMdivBook.appendChild(DOMdiv);
         DOMselect.appendChild(DOMdivBook);
+        return DOMdivBook;
     }
 
     renderDeleteBook(bookId){
@@ -58,12 +118,38 @@ export default class View {
         DOMbook.parentElement.removeChild(DOMbook);
     }
 
-    renderMessage(type, message){
-        const DOMnewMessage = document.createElement('div')
-        DOMnewMessage.innerHTML = `${message} <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove()">x</button> `
-        DOMnewMessage.className  = type + "alert alert-danger alert-dismissible"
-        DOMnewMessage.setAttribute('role',"alert")
+    editBook(book){
+        const DOMdiv = document.getElementById("book-" + book.id);
+        DOMdiv.removeChild(DOMdiv);
+        DOMdiv.innerHTML = `
+        <h2>${book.publisher}</h2>
+        <h3>Id: ${book.id}</h3>
+        <h3>Editorial: ${book.publisher}</h3>
+        <h3>Id: ${book.id}</h3>
+        <h3>Precio: ${book.price}</h3>
+        <h3>Paginas: ${book.pages}</h3>
+        <h3>Estado: ${book.status}</h3>
+        <h3>Comentario: ${book.comments}</h3>
+        <button class="add">
+            <span class="material-icons">icono add_shopping_cart</span>
+        </button>
+        <button class="edit">
+            <span class="material-icons">icono edit</span>
+        </button>
+        <button class="delete">
+            <span class="material-icons">icono delete</span>
+        </button>
+        `;
 
-        this.messages.appendChild(DOMnewMessage)
+        return DOMdiv;
+    }
+
+    renderMessage(type, message){
+        const DOMSelect = document.getElementById("message");
+        const DOMnewMessage = document.createElement('div');
+        DOMnewMessage.innerHTML = `${message} <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" onclick="this.remove.remove()">x</button> `;
+        DOMnewMessage.className  = type + "alert alert-danger alert-dismissible";
+        DOMnewMessage.setAttribute('role',"alert");
+        DOMSelect.appendChild(DOMnewMessage);
     }
 }

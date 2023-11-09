@@ -10,6 +10,16 @@ export default class Books {
     return this.data.find((item) => item.id === id) || {};
   }
 
+  async changeBook(bookChange){
+    const repositoryBooks = new BooksRepository();
+    await repositoryBooks.changeBook(bookChange);
+    const dataNew = [];
+    this.data.forEach((book) => {
+      book.id === bookChange.id ? dataNew.push(bookChange) : dataNew.push(book);
+    })
+    this.data = dataNew;
+  }
+
   async populateData() {
     const repositoryBooks = new BooksRepository();
     const books = await repositoryBooks.getAllBooks();
@@ -29,7 +39,7 @@ export default class Books {
     await repositoryBooks.removeBook(id);
     const index = this.data.findIndex((item) => item.id === id);
     this.data.splice(index, 1);
-    return {};
+    return this.getBookById(id) !== undefined;
   }
 
   toString() {
@@ -92,9 +102,8 @@ export default class Books {
 
   async incrementPriceOfbooks(number) {
     const repository = new BooksRepository();
-    this.data.forEach(async (book) => {
-      bookNew = await repository.updatePriceOfBook(book.id, (book.price * (1 + number)));
-      book = bookNew;
-    });
+    for (let book of this.data) {
+      book = await repository.updatePriceOfBook(book.id, (book.price * (1 + number)));
+    }
   }
 }
