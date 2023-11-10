@@ -84,11 +84,9 @@ export default class View {
     renderBook(book){
         const DOMselect = document.getElementById("list");
         const DOMdivBook = document.createElement("div");
-        const DOMdiv = document.createElement("div");
-
-        DOMdiv.id = "book";
+        DOMdivBook.className = "book";
         DOMdivBook.id = "book-" + book.id;
-        DOMdiv.innerHTML = `
+        DOMdivBook.innerHTML = `
         <h2>${book.publisher}</h2>
         <h3>Id: ${book.id}</h3>
         <h3>Editorial: ${book.publisher}</h3>
@@ -108,7 +106,6 @@ export default class View {
         </button>
         `;
 
-        DOMdivBook.appendChild(DOMdiv);
         DOMselect.appendChild(DOMdivBook);
         return DOMdivBook;
     }
@@ -116,12 +113,12 @@ export default class View {
     renderDeleteBook(bookId){
         const DOMbook = document.getElementById("book-" + bookId);
         DOMbook.parentElement.removeChild(DOMbook);
+        DOMbook.parentElement.removeChild(DOMbook.parentNode);
     }
 
     editBook(book){
-        const DOMdiv = document.getElementById("book-" + book.id);
-        DOMdiv.removeChild(DOMdiv);
-        DOMdiv.innerHTML = `
+        const DOMSelect = document.getElementById("book-" + book.id);
+        DOMSelect.innerHTML = `
         <h2>${book.publisher}</h2>
         <h3>Id: ${book.id}</h3>
         <h3>Editorial: ${book.publisher}</h3>
@@ -140,8 +137,7 @@ export default class View {
             <span class="material-icons">icono delete</span>
         </button>
         `;
-
-        return DOMdiv;
+        return DOMSelect;
     }
 
     renderMessage(type, message){

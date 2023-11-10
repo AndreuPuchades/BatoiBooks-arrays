@@ -79,7 +79,7 @@ a:hover {
   background-color: #333;
 }
 
-#book {
+.book {
   border: 1px solid #ccc;
   padding: 10px;
   background-color: #fff;

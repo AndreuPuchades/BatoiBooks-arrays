@@ -1865,25 +1865,13 @@
     {
       "id": 7,
       "idUser": 2,
-      "idModule": "5021",
-      "publisher": "McGraw-Hill",
-      "price": 232,
-      "pages": 273,
-      "status": "new",
-      "photo": "",
-      "comments": "Sense obrir",
-      "soldDate": ""
-    },
-    {
-      "id": 8,
-      "idUser": 2,
-      "idModule": "0016",
-      "publisher": "a",
+      "idModule": "0026",
+      "publisher": "1",
       "price": 1,
       "pages": 1,
       "status": "good",
       "photo": "",
-      "comments": "q",
+      "comments": "1",
       "soldDate": ""
     }
   ]

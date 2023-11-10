@@ -18,52 +18,69 @@ export default class Controller {
         await this.books.populateData();
         await this.modules.populateData();
         await this.users.populateData();
+        //Renderizar los libros:
         this.books.data.forEach((book) => {
             const DOMBook = this.view.renderBook(book);
             this.addEventListenersToBookElements(book, DOMBook);
         });
-
         //Eliminar todos los DIV:
         this.view.renderAbout(true);
         this.view.renderForm(true);
         this.view.renderList(true);
         //Renderizar las opciones del formulario:
-        await this.view.renderOptionsStatus(["good", "new", "bad"]);
-        await this.view.renderOptionsModules(this.modules.data);
+        this.view.renderOptionsStatus(["good", "new", "bad"]);
+        this.view.renderOptionsModules(this.modules.data);
+        //Escuchador del HASH:
         await this.addEventListenersVerLibros();
         await this.addEventListenersAbout();
         await this.addEventListenersAnyadirLibro();
+
+        //Escuchador del Submit y del Reset:
         await this.addEventListenersbookForm();
         await this.addEventListenersResetForm();
     }
 
-    addEventListenersVerLibros(){
-        document.querySelector('a[href="#list"]').addEventListener("click", async () => {
+    addEventListenersHash() {
+        if (window.location.hash.substring(1) === "bookForm") {
+            this.view.renderForm(false);
+            this.view.renderList(true);
+            this.view.renderAbout(true);
+        } else if(window.location.hash.substring(1) === "list"){
             this.view.renderForm(true);
             this.view.renderList(false);
             this.view.renderAbout(true);
+        } else if(window.location.hash.substring(1) === "about"){
+            this.view.renderForm(true);
+            this.view.renderList(true);
+            this.view.renderAbout(false);
+        }
+    }
+    addEventListenersVerLibros(){
+        document.getElementById("listHash").addEventListener("click", async () => {
+            window.location.hash = "#list";
+            this.addEventListenersHash();
         });
     }
 
     addEventListenersAnyadirLibro(){
-        document.querySelector('a[href="#bookForm"]').addEventListener("click", async () => {
-            this.view.renderForm(false);
-            this.view.renderList(true);
-            this.view.renderAbout(true);
+        document.getElementById("bookFormHash").addEventListener("click", async () => {
+            window.location.hash = "#bookForm";
+            this.addEventListenersHash();
         });
     }
 
     addEventListenersAbout(){
-        document.querySelector('a[href="#about"]').addEventListener("click", async () => {
-            this.view.renderForm(true);
-            this.view.renderList(true);
-            this.view.renderAbout(false);
+        document.getElementById("aboutHash").addEventListener("click", async () => {
+            window.location.hash = "#about";
+            this.addEventListenersHash();
         });
     }
 
     addEventListenersResetForm(){
         this.view.form.addEventListener("reset", async () => {
             this.addEventListenersAnyadirLibro();
+            document.querySelector('button[type="submit"]').innerText = "Añadir";
+            document.getElementById("id").value = "";
         });
     }
 
@@ -71,7 +88,7 @@ export default class Controller {
         this.view.form.addEventListener("submit", async (event) => {
             event.preventDefault();
 
-            const idBook = document.getElementById("id").value;
+            const id = document.getElementById("id").value;
             const idModule = document.getElementById('id-module').value;
             const publisher = document.getElementById('publisher').value;
             const price = parseFloat(document.getElementById('price').value);
@@ -103,20 +120,22 @@ export default class Controller {
                 const idUser = 2;
                 const photo = "";
                 const soldDate = "";
-                if(idBook === ""){
+                if(id === ""){
                     const books = this.books.data;
                     const id = (books[books.length - 1].id) + 1;
                     const book = new Book({id, idUser, idModule, publisher, price, pages, status, photo, comments, soldDate});
                     await this.books.addItem(book);
-                    document.getElementById('bookForm').reset();
                     const DOMBook = this.view.renderBook(book);
                     this.addEventListenersToBookElements(book, DOMBook);
                 } else {
-                    const book = new Book({idBook, idUser, idModule, publisher, price, pages, status, photo, comments, soldDate});
+                    const book = new Book({id, idUser, idModule, publisher, price, pages, status, photo, comments, soldDate});
                     await this.books.changeBook(book);
-                    this.view.editBook(book);
+                    const DOMBook = this.view.editBook(book);
+                    this.addEventListenersToBookElements(book, DOMBook);
                 }
-
+                document.getElementById('bookForm').reset();
+                window.location.hash = "#list";
+                this.addEventListenersHash();
             } catch (error) {
                 this.view.renderMessage('error', error);
             }
