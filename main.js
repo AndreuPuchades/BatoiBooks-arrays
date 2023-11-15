@@ -22,7 +22,7 @@ document.querySelector('#app').innerHTML = `
 <form id="bookForm">
 <div>            
             <label for="id-module">Módulo:</label>
-            <select id="id-module">
+            <select name="id-module" id="id-module" required>
               <option>- Selecciona un módulo -</option>
             </select><br>
           </div>
@@ -34,12 +34,12 @@ document.querySelector('#app').innerHTML = `
         
           <div id="precio">
             <label for="price">Precio:</label>
-            <input type="number" id="price"><br>
+            <input type="number" id="price" min="0" step="0.01" required><br>
           </div>
         
           <div id="paginas">
             <label for="pages">Páginas:</label>
-            <input type="number" id="pages"><br>
+            <input type="number" id="pages" min="0" required><br>
           </div>
         
           <div id="estado">

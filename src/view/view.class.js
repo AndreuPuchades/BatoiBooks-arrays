@@ -32,6 +32,7 @@ export default class View {
             DOMoption.textContent = module.cliteral;
             DOMoption.value = module.code;
             DOMoption.id = module.code;
+            DOMoption.required
 
             DOMselect.appendChild(DOMoption);
         });
@@ -44,6 +45,7 @@ export default class View {
             const DOMoptionLabel = document.createElement("label");
             DOMoptionLabel.id = estado;
             DOMoptionLabel.textContent = estado;
+            DOMoption.required = true;
             DOMoption.type = "radio";
             DOMoption.value = estado;
             DOMoption.name = "estado";
