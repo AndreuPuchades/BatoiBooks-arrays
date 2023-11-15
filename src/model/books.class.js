@@ -61,6 +61,11 @@ export default class Books {
     return books;
   }
 
+  getBookFromModule(idModule) {
+    const books = new Books();
+    return books.data.find((item) => item.idModule === idModule);
+  }
+
   booksCheeperThan(precio) {
     const books = new Books();
     books.data = this.data.filter((item) => item.price <= precio);

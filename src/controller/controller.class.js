@@ -87,7 +87,7 @@ export default class Controller {
     addEventListenersbookForm(){
         this.view.form.addEventListener("submit", async (event) => {
             event.preventDefault();
-
+            //const errors = [];
             const id = document.getElementById("id").value;
             const idModule = document.getElementById('id-module').value;
             const publisher = document.getElementById('publisher').value;
@@ -96,46 +96,53 @@ export default class Controller {
             const comments = document.getElementById('comments').value;
             const status = document.querySelector('input[name="estado"]:checked').value;
 
+            if(!this.view.validateForm()){
+                return;
+            }
+/*
             if (idModule === "- Selecciona un módulo -") {
                 this.view.renderMessage("error", "Selecciona un módulo.");
                 return;
             }
 
+            if (this.books.getBookFromModule(idModule) === undefined) {
+                errors["idModule"] = "Ya existe un libro con el mismo modulo seleccionado.";
+            }
+
             if (status === '') {
-                this.view.renderMessage("error", 'Selecciona un estado.');
-                return;
+                errors["idModule"] = "Selecciona un estado.";
             }
 
             if (isNaN(price) || price <= 0) {
-                this.view.renderMessage("error", "Ingresa un precio válido mayor que 0.");
-                return;
+                errors["idModule"] = "Ingresa un precio válido mayor que 0.";
             }
 
             if (isNaN(pages) || pages <= 0) {
-                this.view.renderMessage("error", "Ingresa un número de páginas válido mayor que 0.");
-                return;
+                errors["idModule"] = "Ingresa un número de páginas válido mayor que 0.";
             }
-
+*/
             try {
                 const idUser = 2;
                 const photo = "";
                 const soldDate = "";
-                if(id === ""){
-                    const books = this.books.data;
-                    const id = (books[books.length - 1].id) + 1;
-                    const book = new Book({id, idUser, idModule, publisher, price, pages, status, photo, comments, soldDate});
-                    await this.books.addItem(book);
-                    const DOMBook = this.view.renderBook(book);
-                    this.addEventListenersToBookElements(book, DOMBook);
-                } else {
-                    const book = new Book({id, idUser, idModule, publisher, price, pages, status, photo, comments, soldDate});
-                    await this.books.changeBook(book);
-                    const DOMBook = this.view.editBook(book);
-                    this.addEventListenersToBookElements(book, DOMBook);
-                }
-                document.getElementById('bookForm').reset();
-                window.location.hash = "#list";
-                this.addEventListenersHash();
+                    if(id === ""){
+                        const books = this.books.data;
+                        const id = (books[books.length - 1].id) + 1;
+                        const book = new Book({id, idUser, idModule, publisher, price, pages, status, photo, comments, soldDate});
+                        await this.books.addItem(book);
+                        const DOMBook = this.view.renderBook(book);
+                        this.addEventListenersToBookElements(book, DOMBook);
+                    } else {
+                        const book = new Book({id, idUser, idModule, publisher, price, pages, status, photo, comments, soldDate});
+                        await this.books.changeBook(book);
+                        const DOMBook = this.view.editBook(book);
+                        this.addEventListenersToBookElements(book, DOMBook);
+                    }
+
+                    document.getElementById('bookForm').reset();
+                    window.location.hash = "#list";
+                    this.addEventListenersHash();
+
             } catch (error) {
                 this.view.renderMessage('error', error);
             }

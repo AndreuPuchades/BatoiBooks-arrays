@@ -19,37 +19,42 @@ document.querySelector('#app').innerHTML = `
   </div>
   
 <div id="form">
-<form id="bookForm">
+<form id="bookForm" novalidate>
 <div>            
             <label for="id-module">Módulo:</label>
             <select name="id-module" id="id-module" required>
               <option>- Selecciona un módulo -</option>
             </select><br>
+            <span class="error"></span>
           </div>
         
           <div id="editorial">
             <label for="publisher">Editorial:</label>
             <input type="text" id="publisher" class="publisher" required><br>
+            <span class="error"></span>
           </div>
         
           <div id="precio">
             <label for="price">Precio:</label>
             <input type="number" id="price" min="0" step="0.01" required><br>
+            <span class="error"></span>
           </div>
         
           <div id="paginas">
             <label for="pages">Páginas:</label>
             <input type="number" id="pages" min="0" required><br>
+            <span class="error"></span>
           </div>
         
           <div id="estado">
             <label id="status">Estado:&nbsp&nbsp</label>
             <!-- Aquí poned un radiobutton para cada estado -->
+            <span class="error"></span>
           </div>
         
           <div id="comentarios">
             <label for="comments">Comentario:</label>
-            <input type="text" id="comments" class="comments" required><br>
+            <input type="text" id="comments" class="comments"><br>
           </div>
           <input type="hidden" id="id" value=""><br>
 

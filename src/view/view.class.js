@@ -32,8 +32,6 @@ export default class View {
             DOMoption.textContent = module.cliteral;
             DOMoption.value = module.code;
             DOMoption.id = module.code;
-            DOMoption.required
-
             DOMselect.appendChild(DOMoption);
         });
     }
@@ -53,6 +51,33 @@ export default class View {
 
             DOMselect.appendChild(DOMoption);
             DOMselect.appendChild(DOMoptionLabel);
+        });
+    }
+
+    validateForm(){
+        if(this.form.checkVisibility()){
+            return true;
+        }
+
+        const inputNamesAll = document.getElementById("bookForm").elements;
+        const inputNames = [];
+        inputNamesAll.forEach((name) =>{
+            if(name.id !== "comments"){
+                inputNames.push(name.id);
+            } else {
+                inputNames.forEach((name) => {
+                    const input = this.form.elements[name];
+                    const spanError = input.parentElement.querySelector("span[class='error']");
+
+                    if(input.checkVisibility()){
+                        spanError.textContent = "";
+                    } else {
+                        spanError.textContent = input.validationMessage;
+                    }
+                });
+
+                return false;
+            }
         });
     }
 
@@ -92,7 +117,7 @@ export default class View {
         <h2>${book.publisher}</h2>
         <h3>Id: ${book.id}</h3>
         <h3>Editorial: ${book.publisher}</h3>
-        <h3>Id: ${book.id}</h3>
+        <h3>IdModule: ${book.idModule}</h3>
         <h3>Precio: ${book.price}</h3>
         <h3>Paginas: ${book.pages}</h3>
         <h3>Estado: ${book.status}</h3>

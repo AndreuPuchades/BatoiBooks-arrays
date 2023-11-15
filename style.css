@@ -201,3 +201,8 @@ footer {
 .oculto {
   display: none !important;
 }
+
+span.error {
+  color: red;
+  font-weight: bold;
+}
