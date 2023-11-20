@@ -87,7 +87,6 @@ export default class Controller {
     addEventListenersbookForm(){
         this.view.form.addEventListener("submit", async (event) => {
             event.preventDefault();
-            //const errors = [];
             const id = document.getElementById("id").value;
             const idModule = document.getElementById('id-module').value;
             const publisher = document.getElementById('publisher').value;
@@ -99,28 +98,12 @@ export default class Controller {
             if(!this.view.validateForm()){
                 return;
             }
-/*
-            if (idModule === "- Selecciona un módulo -") {
-                this.view.renderMessage("error", "Selecciona un módulo.");
+
+            if (this.books.getBookFromModule(idModule) === undefined) {
+                this.view.renderMessage("error", "Ya existe este modulo.");
                 return;
             }
 
-            if (this.books.getBookFromModule(idModule) === undefined) {
-                errors["idModule"] = "Ya existe un libro con el mismo modulo seleccionado.";
-            }
-
-            if (status === '') {
-                errors["idModule"] = "Selecciona un estado.";
-            }
-
-            if (isNaN(price) || price <= 0) {
-                errors["idModule"] = "Ingresa un precio válido mayor que 0.";
-            }
-
-            if (isNaN(pages) || pages <= 0) {
-                errors["idModule"] = "Ingresa un número de páginas válido mayor que 0.";
-            }
-*/
             try {
                 const idUser = 2;
                 const photo = "";
@@ -142,7 +125,6 @@ export default class Controller {
                     document.getElementById('bookForm').reset();
                     window.location.hash = "#list";
                     this.addEventListenersHash();
-
             } catch (error) {
                 this.view.renderMessage('error', error);
             }

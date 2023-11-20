@@ -1899,58 +1899,10 @@
       "soldDate": ""
     },
     {
-      "id": 11,
-      "idUser": 2,
-      "idModule": "0028",
-      "publisher": "Prueba4",
-      "price": 12,
-      "pages": 122,
-      "status": "good",
-      "photo": "",
-      "comments": "Buen libro",
-      "soldDate": ""
-    },
-    {
-      "id": 12,
-      "idUser": 2,
-      "idModule": "0031",
-      "publisher": "Prueba5",
-      "price": 12,
-      "pages": 122,
-      "status": "good",
-      "photo": "",
-      "comments": "Buen libro",
-      "soldDate": ""
-    },
-    {
       "id": 13,
       "idUser": 2,
       "idModule": "0028",
       "publisher": "Prueba6",
-      "price": 12,
-      "pages": 122,
-      "status": "good",
-      "photo": "",
-      "comments": "Buen libro",
-      "soldDate": ""
-    },
-    {
-      "id": 14,
-      "idUser": 2,
-      "idModule": "0026",
-      "publisher": "Prueba7",
-      "price": 12,
-      "pages": 122,
-      "status": "good",
-      "photo": "",
-      "comments": "Buen libro",
-      "soldDate": ""
-    },
-    {
-      "id": 15,
-      "idUser": 2,
-      "idModule": "0045",
-      "publisher": "Prueba8",
       "price": 12,
       "pages": 122,
       "status": "good",
