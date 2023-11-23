@@ -61,9 +61,9 @@ export default class Books {
     return books;
   }
 
-  getBookFromModule(idModule) {
-    const books = new Books();
-    return books.data.find((item) => item.idModule === idModule);
+  async getBookFromModuleAndUser(idUser, idModule) {
+    const repository = new BooksRepository()
+    return await repository.getBookFromModuleAndUser(idUser, idModule);
   }
 
   booksCheeperThan(precio) {

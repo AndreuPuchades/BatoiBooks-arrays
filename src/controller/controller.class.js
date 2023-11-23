@@ -77,7 +77,7 @@ export default class Controller {
     }
 
     addEventListenersResetForm(){
-        this.view.form.addEventListener("reset", async () => {
+        this.view.bookForm.addEventListener("reset", async () => {
             this.addEventListenersAnyadirLibro();
             document.querySelector('button[type="submit"]').innerText = "Añadir";
             document.getElementById("id").value = "";
@@ -85,27 +85,34 @@ export default class Controller {
     }
 
     addEventListenersbookForm(){
-        this.view.form.addEventListener("submit", async (event) => {
+        this.view.bookForm.addEventListener("submit", async (event) => {
             event.preventDefault();
-            const id = document.getElementById("id").value;
+            const idUser = 2;
             const idModule = document.getElementById('id-module').value;
-            const publisher = document.getElementById('publisher').value;
-            const price = parseFloat(document.getElementById('price').value);
-            const pages = parseInt(document.getElementById('pages').value);
-            const comments = document.getElementById('comments').value;
-            const status = document.querySelector('input[name="estado"]:checked').value;
+            if(idModule){
+                try {
+                    if (await this.books.getBookFromModuleAndUser(idUser, idModule)) {
+                        document.getElementById('id-module').setCustomValidity('Ya has añadido ese libro')
+                    } else {
+                        document.getElementById('id-module').setCustomValidity('')
+                    }
+                } catch (error) {
+                    this.view.renderMessage('error', 'Error comprobando si existe el libro: '+ error)
+                }
+            }
 
             if(!this.view.validateForm()){
                 return;
             }
 
-            if (this.books.getBookFromModule(idModule) === undefined) {
-                this.view.renderMessage("error", "Ya existe este modulo.");
-                return;
-            }
-
             try {
-                const idUser = 2;
+                const id = document.getElementById("id").value;
+                const publisher = document.getElementById('publisher').value;
+                const price = parseFloat(document.getElementById('price').value);
+                const pages = parseInt(document.getElementById('pages').value);
+                const comments = document.getElementById('comments').value;
+                const status = document.querySelector('input[name="status"]:checked').value;
+
                 const photo = "";
                 const soldDate = "";
                     if(id === ""){

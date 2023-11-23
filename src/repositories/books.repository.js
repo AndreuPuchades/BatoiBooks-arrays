@@ -10,6 +10,15 @@ export default class BooksRepository{
         return myData;
     }
 
+    async getBookFromModuleAndUser(idUser, idModule) {
+        const response = await fetch(server + `/books?idUser=${idUser}&idModule=${idModule}`);
+        if (!response.ok) {
+            throw `Error ${response.status} de la BBDD: ${response.statusText}`;
+        }
+        const data = await response.json();
+        return data.length;
+    }
+
     async getBookById(idBook) {
         const response = await fetch(server + '/books/' + idBook);
         if (!response.ok) {

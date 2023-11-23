@@ -4,7 +4,7 @@ export default class View {
         this.listBooks = document.getElementById("list");
         this.submit = document.getElementById("submit");
         this.about = document.getElementById("about");
-        this.form = document.getElementById("bookForm");
+        this.bookForm = document.getElementById("bookForm");
         this.remove = document.getElementById("remove");
     }
 
@@ -37,7 +37,7 @@ export default class View {
     }
 
     renderOptionsStatus(status){
-        const DOMselect = document.getElementById("estado");
+        const DOMselect = document.getElementById("status");
         status.forEach((estado) => {
             const DOMoption = document.createElement("input");
             const DOMoptionLabel = document.createElement("label");
@@ -46,7 +46,7 @@ export default class View {
             DOMoption.required = true;
             DOMoption.type = "radio";
             DOMoption.value = estado;
-            DOMoption.name = "estado";
+            DOMoption.name = "status";
             DOMoption.id = estado;
 
             DOMselect.appendChild(DOMoption);
@@ -54,29 +54,21 @@ export default class View {
         });
     }
 
-    validateForm(){
-        if(this.form.checkVisibility()){
+    validateForm() {
+        if (this.bookForm.checkValidity()) {
+            document.querySelectorAll('#bookForm span.error').forEach((span) => {
+                span.textContent = '';
+            });
             return true;
         }
 
-        const inputNamesAll = document.getElementById("bookForm").elements;
-        const inputNames = [];
-        inputNamesAll.forEach((name) =>{
-            if(name.id !== "comments"){
-                inputNames.push(name.id);
+        Array.from(this.bookForm.elements).forEach((item) => {
+            const spanError = item.parentElement.querySelector('span.error');
+
+            if (item.checkValidity()) {
+                spanError.textContent = "";
             } else {
-                inputNames.forEach((name) => {
-                    const input = this.form.elements[name];
-                    const spanError = input.parentElement.querySelector("span[class='error']");
-
-                    if(input.checkVisibility()){
-                        spanError.textContent = "";
-                    } else {
-                        spanError.textContent = input.validationMessage;
-                    }
-                });
-
-                return false;
+                spanError.textContent = item.validationMessage;
             }
         });
     }
@@ -101,11 +93,11 @@ export default class View {
 
     renderForm(eliminar){
         if(eliminar){
-            this.form.classList.add("oculto");
+            this.bookForm.classList.add("oculto");
         } else {
-            this.form.classList.remove("oculto");
+            this.bookForm.classList.remove("oculto");
         }
-        return this.form;
+        return this.bookForm;
     }
 
     renderBook(book){

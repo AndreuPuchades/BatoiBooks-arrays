@@ -20,10 +20,10 @@ document.querySelector('#app').innerHTML = `
   
 <div id="form">
 <form id="bookForm" novalidate>
-<div>            
+            <div>            
             <label for="id-module">Módulo:</label>
             <select name="id-module" id="id-module" required>
-              <option>- Selecciona un módulo -</option>
+              <option value="">- Selecciona un módulo -</option>
             </select><br>
             <span class="error"></span>
           </div>
@@ -46,8 +46,8 @@ document.querySelector('#app').innerHTML = `
             <span class="error"></span>
           </div>
         
-          <div id="estado">
-            <label id="status">Estado:&nbsp&nbsp</label>
+          <div id="status">
+            <label id="estado">Estado:&nbsp&nbsp</label>
             <!-- Aquí poned un radiobutton para cada estado -->
             <span class="error"></span>
           </div>
@@ -55,6 +55,7 @@ document.querySelector('#app').innerHTML = `
           <div id="comentarios">
             <label for="comments">Comentario:</label>
             <input type="text" id="comments" class="comments"><br>
+            <span class="error"></span>
           </div>
           <input type="hidden" id="id" value=""><br>
 

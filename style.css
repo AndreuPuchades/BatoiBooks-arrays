@@ -59,12 +59,12 @@ a:hover {
   padding: 20px;
 }
 
-#estado {
+#status {
   display: flex;
   align-items: center;
 }
 
-#estado input[type="radio"] {
+#status input[type="radio"] {
   content: '';
   display: inline-block;
   width: 12px;
@@ -75,7 +75,7 @@ a:hover {
   cursor: pointer;
 }
 
-#estado input[type="radio"]:checked {
+#status input[type="radio"]:checked {
   background-color: #333;
 }
 
